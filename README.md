@@ -28,7 +28,7 @@ gh-dl -h | --help
 ## Example
 
 ```bash
-gh-dl --user=curtisalexander --pkg=CRAmisc --path=/Volumes/Data Science/Code/R/pkgs"
+gh-dl --user=rstudio --pkg=sparklyr --path="~/code/R/pkgs"
 ```
 
 ## Caveats

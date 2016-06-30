@@ -16,7 +16,7 @@ Options:
     -h, --help      Help
 
 Example:
-    gh-dl --user=curtisalexander --pkg=CRAmisc --path=/Volumes/Data Science/Code/R/pkgs" -> doc
+    gh-dl --user=rstudio --pkg=sparklyr --path=\"~/code/R/pkgs\"" -> doc
 
 ## download ==
 opts <- docopt::docopt(doc)
