@@ -31,6 +31,21 @@ gh-dl -h | --help
 gh-dl --user=rstudio --pkg=sparklyr --path="~/code/R/pkgs"
 ```
 
+## Use Case
+When working on particular servers, I do not have the ability to install packages from Github.  The only way to install a package is to download the package as a `tar.gz` file from a different machine, copy it to the server, and perform a local install on the server.
+
+I typically save the `tar.gz` files into the same directory.  This allows me to execute the following to install the package.
+
+```R
+# install sparklyr package
+pkg_dir <- "~/code/R/pkgs"
+tgz_file <- list.files(path = pkg_dir,
+                       pattern = "^sparklyr",
+                       recursive = FALSE)
+pkg <- file.path(pkg_dir, tgz_file)
+devtools::install_local(pkg)
+```
+
 ## Caveats
 I have need to use a [custom certificate](https://github.com/curtisalexander/til/blob/master/R/custom-cert.md) in order to download packages using `httr`.  I have hard coded my certificate location in the script.  Either remove or update as needed.
 
