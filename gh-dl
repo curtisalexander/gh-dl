@@ -1,0 +1,33 @@
+#!/usr/local/bin/Rscript --vanilla
+
+## required packages ==
+# devtools::install_github("docopt/docopt.R")
+# install.packages("httr")
+
+## docopt.org ==
+"Usage:
+    gh-dl --user=<user> --pkg=<pkg> --path=<path>
+    gh-dl -h | --help
+
+Options:
+    --user=<user>   Github username
+    --pkg=<pkg>     R package name
+    --path=<path>   Directory path to save tar.gz file
+    -h, --help      Help
+
+Example:
+    gh-dl --user=curtisalexander --pkg=CRAmisc --path=/Volumes/Data Science/Code/R/pkgs" -> doc
+
+## download ==
+opts <- docopt::docopt(doc)
+
+pkg_path <- file.path(opts$path)
+
+url <- paste0("https://api.github.com/repos/",
+              opts$user, "/",
+              opts$pkg, "/tarball")
+
+httr::set_config(httr::config(cainfo = "/Users/calexander/.cert/ca-bundle.crt")) 
+httr::GET(url, httr::write_disk(file.path(pkg_path, paste0(opts$pkg, ".tar.gz"))))
+
+# vim:syntax=R
