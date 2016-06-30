@@ -34,7 +34,9 @@ gh-dl --user=rstudio --pkg=sparklyr --path="~/code/R/pkgs"
 ## Use Case
 When working on particular servers, I do not have the ability to install packages from Github.  The only way to install a package is to download the package as a `tar.gz` file from a different machine, copy it to the server, and perform a local install on the server.
 
-I typically save the `tar.gz` files into the same directory.  This allows me to execute the following to install the package.
+I typically save the latest version of a package as a `tar.gz` file in a common directory.  This allows me to execute code similar to that below to install the package.
+
+The code below will also allow me to install a locally developed package without needing to remember the exact version number. I simply replace the locally developed package in the directory with the latest version.
 
 ```R
 # install sparklyr package
