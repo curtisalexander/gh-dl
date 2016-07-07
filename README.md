@@ -49,10 +49,8 @@ devtools::install_local(pkg)
 ```
 
 ## Caveats
-I have need to use a [custom certificate](https://github.com/curtisalexander/til/blob/master/R/custom-cert.md) in order to download packages using `httr`.  I have hard coded my certificate location in the script.  Either remove or update as needed.
+I have need to use a [custom certificate](https://github.com/curtisalexander/til/blob/master/R/custom-cert.md) in order to download packages using `httr`.  If you have a similar need, then create a variable in `.Renviron` named `HTTR_CAINFO` which points to your CA file.  For my needs, I have an entry in `.Renvrion` that looks like the following.
 
-The line to be removed or updated is
-
-```R
-httr::set_config(httr::config(cainfo = "/Users/calexander/.cert/ca-bundle.crt"))
+```
+HTTR_CAINFO=/Users/username/.cert/ca-bundle.crt
 ```
