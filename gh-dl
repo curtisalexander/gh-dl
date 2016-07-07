@@ -1,4 +1,7 @@
-#!/usr/local/bin/Rscript --vanilla
+#!/usr/local/bin/Rscript --no-site-file --no-init-file --no-restore
+
+# --vanilla ==> --no-site-file --no-init-file --no-restore --no-environ
+# thus the above reads the .Renviron file(s)
 
 ## required packages ==
 # devtools::install_github("docopt/docopt.R")
