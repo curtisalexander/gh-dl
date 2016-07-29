@@ -32,11 +32,12 @@ url <- paste0("https://api.github.com/repos/",
 
 # get CA path (if needed)
 # store path to CA file in the .Renviron file, naming it HTTR_CAINFO
-httr_cainfo <- Sys.getenv("HTTR_CAINFO")
+# httr_cainfo <- Sys.getenv("HTTR_CAINFO")
 
-if(httr_cainfo != "") {
-  httr::set_config(httr::config(cainfo = httr_cainfo))
-}
+# if(httr_cainfo != "") {
+#   httr::set_config(httr::config(cainfo = httr_cainfo))
+# }
+
 httr::GET(url, httr::write_disk(file.path(pkg_path, paste0(opts$pkg, ".tar.gz"))))
 
 # vim:syntax=R
