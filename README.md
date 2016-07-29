@@ -49,6 +49,8 @@ devtools::install_local(pkg)
 ```
 
 ## Caveats
+As of *2016-07-29*, I don't believe this is necessary anymore due to the `httr` package making use of the `curl` package for HTTPS downloads.  I will verify and then remove the unneeded code and the entry below here in the `README.md`.
+
 I have need to use a [custom certificate](https://github.com/curtisalexander/til/blob/master/R/custom-cert.md) in order to download packages using `httr`.  If you have a similar need, then create a variable in `.Renviron` named `HTTR_CAINFO` which points to your CA file.  For my needs, I have an entry in `.Renviron` that looks like the following.
 
 ```
