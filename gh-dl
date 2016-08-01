@@ -19,7 +19,7 @@ Options:
     -h, --help      Help
 
 Example:
-    gh-dl --user=rstudio --pkg=sparklyr --path=\"~/code/R/pkgs\"" -> doc
+    gh-dl --user=rstudio --pkg=sparklyr --path=\"~/code/r-pkgs\"" -> doc
 
 ## download ==
 opts <- docopt::docopt(doc)

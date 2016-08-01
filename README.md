@@ -29,7 +29,7 @@ gh-dl -h | --help
 ## Example
 
 ```bash
-gh-dl --user=rstudio --pkg=sparklyr --path="~/code/R/pkgs"
+gh-dl --user=rstudio --pkg=sparklyr --path="~/code/r-pkgs"
 ```
 
 ## Use Case
