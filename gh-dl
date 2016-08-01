@@ -24,11 +24,20 @@ Example:
 ## download ==
 opts <- docopt::docopt(doc)
 
-pkg_path <- file.path(opts$path)
+library("purrr")
 
-url <- paste0("https://api.github.com/repos/",
-              opts$user, "/",
-              opts$pkg, "/tarball")
+# interactive vs. Rscript
+if (interactive()) {
+  # testing
+  user <- "curtisalexander"
+  pkg <- "CRAmisc"
+  pkg_path <- file.path("~/blah")
+  # pkg_path <- tempfile()
+} else {
+  user <- opts$user
+  pkg <- opts$pkg
+  pkg_path <- file.path(opts$path)
+}
 
 # get CA path (if needed)
 # store path to CA file in the .Renviron file, naming it HTTR_CAINFO
@@ -38,6 +47,41 @@ url <- paste0("https://api.github.com/repos/",
 #   httr::set_config(httr::config(cainfo = httr_cainfo))
 # }
 
-httr::GET(url, httr::write_disk(file.path(pkg_path, paste0(opts$pkg, ".tar.gz"))))
+# DESCRIPTION metadata
+desc_url <- httr::modify_url("https://api.github.com",
+                             path = paste0("repos/",
+                                           user, "/",
+                                           pkg, "/",
+                                           "contents/DESCRIPTION"))
+
+# get the URL to download the DESCRIPTION file
+httr::GET(desc_url) %>%
+  httr::stop_for_status() %>%
+  httr::content(as = "parsed") %>%
+  .$download_url -> dl_url
+
+# from the DESCRIPTION file, parse out the version
+httr::GET(dl_url) %>%
+  httr::stop_for_status() %>%
+  httr::content(as = "text") %>%
+  strsplit("\n") %>%
+  purrr::flatten_chr() %>%
+  purrr::keep(~ grepl(pattern = "^Version", x = ., perl = TRUE)) %>%
+  strsplit(":") %>%
+  purrr::flatten_chr() %>%
+  purrr::map_chr(trimws) %>%
+  purrr::keep(~ grepl(pattern = "[[:digit:]]", x = ., perl = TRUE)) -> version
+
+# download the R package as a tarball
+tarball_url <- httr::modify_url("https://api.github.com",
+                                path = paste0("repos/",
+                                           user, "/",
+                                           pkg, "/",
+                                           "tarball"))
+
+# download tarball
+httr::GET(tarball_url,
+          httr::write_disk(file.path(pkg_path,
+                                     paste0(pkg, "_", version, ".tar.gz"))))
 
 # vim:syntax=R

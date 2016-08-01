@@ -2,11 +2,12 @@
 Download an R package as a tarball from Github.
 
 ## Requirements
-Makes use of `httr` and `docopt`.
+Makes use of `docopt`, `httr`, and `purrr`.  And makes use of `devtools` in order to install `docopt`.
 
 ```R
-install.packages("httr")
 devtools::install_github("docopt/docopt.R")
+install.packages("httr")
+install.packages("purrr")
 ```
 
 ## Usage
