@@ -31,21 +31,12 @@ if (interactive()) {
   # testing
   user <- "curtisalexander"
   pkg <- "CRAmisc"
-  pkg_path <- file.path("~/blah")
-  # pkg_path <- tempfile()
+  pkg_path <- file.path("~/code/r-pkgs")
 } else {
   user <- opts$user
   pkg <- opts$pkg
   pkg_path <- file.path(opts$path)
 }
-
-# get CA path (if needed)
-# store path to CA file in the .Renviron file, naming it HTTR_CAINFO
-# httr_cainfo <- Sys.getenv("HTTR_CAINFO")
-
-# if(httr_cainfo != "") {
-#   httr::set_config(httr::config(cainfo = httr_cainfo))
-# }
 
 # DESCRIPTION metadata
 desc_url <- httr::modify_url("https://api.github.com",
