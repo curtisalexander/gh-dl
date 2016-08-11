@@ -13,10 +13,10 @@
     gh-dl -h | --help
 
 Options:
-    --user=<user>   Github username
-    --pkg=<pkg>     R package name
-    --path=<path>   Directory path to save tar.gz file
-    -h, --help      Help
+    --user=<user>       Github username
+    --pkg=<pkg>         R package name
+    --path=<path>       Directory path to save tar.gz file
+    -h, --help          Help
 
 Example:
     gh-dl --user=rstudio --pkg=sparklyr --path=\"~/code/r-pkgs\"" -> doc
